@@ -7,8 +7,8 @@
     "start": "nodemon src/server.js --exec babel-node",
     "start-db-emulator": "gcloud beta emulators datastore start --no-store-on-disk",
     "build": "gulp build",
-    "deploy-gcloud": "gcloud beta functions deploy discogsService --stage-bucket record-scrobbler-src --trigger-http --local-path=build --region=us-central1",
-    "deploy-local": "functions deploy discogsService --trigger-http --source=build",
+    "deploy-gcloud": "gcloud beta functions deploy discogsService --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
+    "deploy-local": "functions deploy discogsService --trigger-http --local-path=build",
     "clean": "gulp clean"
   },
   "author": "Filipe Tavares",

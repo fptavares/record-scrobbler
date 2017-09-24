@@ -1,0 +1,13 @@
+.loginButton {
+  display: inline-block;
+  background-color: #2d2e2f;
+  width: 120px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  border-style: none;
+  cursor: pointer;
+}
+.loginContainer {
+  text-align: left;
+}

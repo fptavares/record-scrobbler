@@ -13,7 +13,8 @@ import config from './config';
 
 const {
   CORS_ORIGIN,
-  JWT_SECRET
+  JWT_SECRET,
+  GRAPHIQL_USERNAME
 } = config;
 
 // instatiate Redis client on app load
@@ -48,7 +49,7 @@ app.use('/graphql', graphQLHTTP(req => {
 }));
 app.use('/graphiql', graphQLHTTP(() => {
   return {
-    context: { user: { username: 'ftavares' }, loaders: createLoaders() },
+    context: { user: { username: GRAPHIQL_USERNAME }, loaders: createLoaders() },
     schema,
     pretty: true,
     graphiql: true,
