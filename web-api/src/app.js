@@ -30,7 +30,7 @@ app.use(cors({
 app.use(jwt({
   secret: JWT_SECRET,
   credentialsRequired: false,
-}));//.unless({path: ['/token', '/graphiql']}));
+}));
 
 app.use('/graphql', graphQLHTTP(req => {
   return {
@@ -47,14 +47,14 @@ app.use('/graphql', graphQLHTTP(req => {
     }
   };
 }));
-app.use('/graphiql', graphQLHTTP(() => {
+/*app.use('/graphiql', graphQLHTTP(() => {
   return {
     context: { user: { username: GRAPHIQL_USERNAME }, loaders: createLoaders() },
     schema,
     pretty: true,
     graphiql: true,
   };
-}));
+}));*/
 // error handling
 app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
   if (err.name === 'UnauthorizedError') {
