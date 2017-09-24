@@ -42,12 +42,10 @@ function fetchQuery(operation, variables) {
     }
 
     return Promise.resolve(json);
-  }).catch((err) => {
+  })/*.catch((err) => {
     console.error("Error on fetch:", err);
-    return {
-      message: err.message
-    };
-  });
+    return Promise.reject(err);
+  })*/;
 }
 
 const network = Network.create(fetchQuery)

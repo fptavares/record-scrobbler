@@ -1,7 +1,8 @@
 {
   "name": "web-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "homepage": "https://fptavares.github.io/record-scrobbler",
   "dependencies": {
     "query-string": "^5.0.0",
     "react": "^15.6.1",
@@ -11,6 +12,8 @@
     "relay-modern-scripts": "^1.0.6"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -19,6 +22,7 @@
   },
   "devDependencies": {
     "babel-relay-plugin": "^0.11.0",
+    "gh-pages": "^1.0.0",
     "relay-compiler": "^1.1.0"
   }
 }
