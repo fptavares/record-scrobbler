@@ -1,14 +1,5 @@
-import {
-  GraphQLInt,
-} from 'graphql';
-import {
-  connectionDefinitions,
-  connectionFromArraySlice,
-  getOffsetWithDefault,
-} from 'graphql-relay';
-
+import { connectionDefinitions } from 'graphql-relay';
 import { GraphQLAlbum } from './album';
-
 
 const {
   connectionType: UserCollectionConnection,

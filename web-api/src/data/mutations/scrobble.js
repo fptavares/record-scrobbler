@@ -19,7 +19,7 @@ const GraphQLScrobbleMutation = mutationWithClientMutationId({
     ignored: { type: GraphQLInt },
     playlist: { type: GraphQLPlaylist },
   },
-  mutateAndGetPayload: async({releaseIds}, {user, loaders}) => {
+  mutateAndGetPayload: async(args, {user, loaders}) => {
     if (!user || !user.username) {
       throw Error('Must authenticate Discogs first!');
     }

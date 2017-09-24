@@ -14,7 +14,7 @@ import config from './config';
 const {
   CORS_ORIGIN,
   JWT_SECRET,
-  GRAPHIQL_USERNAME
+  //GRAPHIQL_USERNAME
 } = config;
 
 // instatiate Redis client on app load
