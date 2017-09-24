@@ -8,7 +8,7 @@
     "start-db-emulator": "gcloud beta emulators datastore start --no-store-on-disk",
     "build": "gulp build",
     "deploy-gcloud": "gcloud beta functions deploy discogsService --stage-bucket record-scrobbler-src --trigger-http --local-path=build --region=us-central1",
-    "deploy-local": "functions deploy discogsService --trigger-http --local-path=build",
+    "deploy-local": "functions deploy discogsService --trigger-http --source=build",
     "clean": "gulp clean"
   },
   "author": "Filipe Tavares",
@@ -17,7 +17,6 @@
     "@google-cloud/datastore": "^1.1.0",
     "@google-cloud/trace-agent": "^2.2.0",
     "@google/cloud-debug": "^0.9.3",
-    "babel-runtime": "^6.26.0",
     "disconnect": "^1.0.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
@@ -26,13 +25,12 @@
     "morgan": "^1.8.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-eslint": "^3.0.1",
-    "gulp-uglify": "^2.0.0"
+    "gulp-babel": "^7.0.0",
+    "gulp-eslint": "^4.0.0",
+    "gulp-uglify": "^3.0.0"
   }
 }

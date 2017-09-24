@@ -6,16 +6,18 @@ const datastore = Datastore({
   projectId: 'record-scrobbler'
 });
 
-async function getMany(kind, ids, parent=[], missingCallback, idField = 'id') {
+async function getMany(kind, ids, parent=[], missingCallback, idField='id') {
+  const data = await datastore.get(ids.map(id => datastore.key([...parent, kind, id])));
   return normalizeResults(
-    await datastore.get(ids.map(id => datastore.key([...parent, kind, id]))),
+    data[0], // for some reason, the results are wrapped around an array of 1 - https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/1.1.0/datastore?method=get
     ids,
     idField,
     missingCallback
   );
 }
-function getOne(kind, id, parent=[]) {
-  return datastore.get(datastore.key([...parent, kind, id]));
+async function getOne(kind, id, parent=[]) {
+  const data = await datastore.get(datastore.key([...parent, kind, id]));
+  return data[0];
 }
 
 function put(kind, id, data) {
@@ -29,7 +31,7 @@ function put(kind, id, data) {
   return datastore.save(item);
 }
 
-async function queryCollection(username, folder, search, from, size) {
+async function queryCollection(username, folder, search, after, size) {
   let query = datastore.createQuery('CollectionAlbum');
 
   query = query.hasAncestor(datastore.key(['User', username]))
@@ -43,8 +45,8 @@ async function queryCollection(username, folder, search, from, size) {
     query = query.filter('artist', '=', search);
     // TODO: replace with proper solution for full text search
   }
-  if (from) {
-    query = query.start(from);
+  if (after) {
+    query = query.start(after);
   }
 
   const [ albums, { endCursor, moreResults } ] = await query.run();
@@ -69,7 +71,7 @@ function putUserCollection(username, user, collection) {
   // Add collection
   collection.forEach(album  => {
     items.push({
-      key: datastore.key(["User", username, "CollectionAlbum", album.albumId]),
+      key: datastore.key(["User", username, "CollectionAlbum", album.id]),
       data: album
     });
   });

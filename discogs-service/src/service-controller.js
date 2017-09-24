@@ -5,12 +5,12 @@ import db from './datastore-client';
  * Authentication
  */
 
-export function getOauthRequestToken(callbackUrl) {
+function getOauthRequestToken(callbackUrl) {
   // Authenticate by consumer key and secret
   return discogs.loadRequestToken(callbackUrl);
 }
 
-export function authenticate(oauthRequestToken, oauthVerifier) {
+function authenticate(oauthRequestToken, oauthVerifier) {
   return discogs.authenticate(oauthRequestToken, oauthVerifier);
 }
 
@@ -18,7 +18,7 @@ export function authenticate(oauthRequestToken, oauthVerifier) {
  * Discogs User
  */
 
-export function getDiscogsUser(oauthToken, username) {
+function getDiscogsUser(oauthToken, username) {
   return db.getUser(username);
 }
 
@@ -26,7 +26,7 @@ export function getDiscogsUser(oauthToken, username) {
  * Discogs User Collection
  */
 
-export async function getDiscogsCollection(oauth, username, folder, search, from, size=30) {
+async function getDiscogsCollection(oauth, username, folder, search, after, size=30) {
   if (!username) {
     throw new Error("Missing username!");
   }
@@ -36,12 +36,12 @@ export async function getDiscogsCollection(oauth, username, folder, search, from
     username,
     parseInt(folder),
     search,
-    from,
+    after,
     parseInt(size)
   );
 
   // load collection if it's an unfiltered first request
-  if ((!results.albums || results.albums.length === 0) && !from && !search && !folder) {
+  if ((!results.albums || results.albums.length === 0) && !after && !search && !folder) {
     console.log('Collection doesn\'t exist in the database:', username);
     // load Discogs user and collection
     await loadUserCollectionFromDiscogs(oauth, username);
@@ -50,7 +50,7 @@ export async function getDiscogsCollection(oauth, username, folder, search, from
       username,
       parseInt(folder),
       search,
-      from,
+      after,
       parseInt(size)
     );
   }
@@ -71,7 +71,7 @@ async function loadUserCollectionFromDiscogs(oauth, username) {
   console.log('New collection loaded successfuly:', username);
 }
 
-export function getDiscogsCollectionAlbum(username, albumIds) {
+function getDiscogsCollectionAlbum(username, albumIds) {
   return db.getCollectionAlbums(username, albumIds);
 }
 
@@ -79,7 +79,7 @@ export function getDiscogsCollectionAlbum(username, albumIds) {
  * Discogs Releases
  */
 
-export function getDiscogsRelease(releaseIds) {
+function getDiscogsRelease(releaseIds) {
   return db.getReleases(releaseIds, id => loadReleaseFromDiscogs(id));
 }
 
@@ -100,3 +100,12 @@ async function loadReleaseFromDiscogs(releaseId) {
     return null;
   }
 }
+
+export {
+  getOauthRequestToken,
+  authenticate,
+  getDiscogsUser,
+  getDiscogsCollection,
+  getDiscogsCollectionAlbum,
+  getDiscogsRelease
+};
