@@ -6,13 +6,15 @@
     "start": "nodemon src/server.js --exec babel-node",
     "build": "gulp build",
     "update-schema": "babel-node ./scripts/updateSchema.js",
-    "deploy-gcloud": "gcloud beta functions deploy apiService --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
+    "predeploy": "yarn build",
+    "deploy": "gcloud beta functions deploy apiService --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
     "deploy-local": "functions deploy apiService --trigger-http --local-path=build",
     "clean": "gulp clean"
   },
   "author": "Filipe Tavares",
   "license": "MIT",
   "dependencies": {
+    "@google-cloud/trace-agent": "^2.2.0",
     "@google/cloud-debug": "^0.9.3",
     "axios": "^0.16.2",
     "cors": "^2.8.4",

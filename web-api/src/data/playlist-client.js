@@ -65,9 +65,11 @@ export function getPlaylist(username) {
       } else if (results === null || results.length === 0) {
         return resolve(new Map([]));
       } else {
-        resolve(new Map(
-          Object.entries(results).map(entry => entry.map(v => parseInt(v)))
-        ));
+        const playlistMap = new Map();
+        Object.keys(results).forEach(key => {
+          playlistMap.set(parseInt(key), parseInt(results[key]));
+        });
+        resolve(playlistMap);
       }
     });
   });

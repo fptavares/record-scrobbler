@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import express from 'express';
 import morgan from 'morgan';
 import graphQLHTTP from 'express-graphql';
@@ -58,11 +57,11 @@ app.use('/graphql', graphQLHTTP(req => {
 // error handling
 app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
   if (err.name === 'UnauthorizedError') {
-    return res.status(401).json({
-      message: 'Unauthorized - please authenticate.'
-    });
+    res.status(401).json({message: 'Invalid token'});
+  } else {
+    console.error(err);
+    res.status(500).json({message: err.message})
   }
-  console.error(err);
 });
 
 export default app;
