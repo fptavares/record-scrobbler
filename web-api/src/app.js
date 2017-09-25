@@ -1,5 +1,4 @@
 import express from 'express';
-import morgan from 'morgan';
 import graphQLHTTP from 'express-graphql';
 import cors from 'cors';
 import jwt from 'express-jwt';
@@ -21,10 +20,9 @@ initRedisClient();
 
 // create express application
 const app = express();
-app.use(morgan('tiny'));
 app.use(cors({
   origin: CORS_ORIGIN,
-  //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  maxAge: 600
 }));
 app.use(jwt({
   secret: JWT_SECRET,
@@ -35,7 +33,7 @@ app.use('/graphql', graphQLHTTP(req => {
   return {
     context: { user: req.user, loaders: createLoaders(req.user) },
     schema,
-    formatError: error => {
+    /*formatError: error => {
       console.error('Graphql error:', error);
       return {
         message: error.message,
@@ -43,17 +41,9 @@ app.use('/graphql', graphQLHTTP(req => {
         stack: error.stack,
         path: error.path
       };
-    }
+    }*/
   };
 }));
-/*app.use('/graphiql', graphQLHTTP(() => {
-  return {
-    context: { user: { username: GRAPHIQL_USERNAME }, loaders: createLoaders() },
-    schema,
-    pretty: true,
-    graphiql: true,
-  };
-}));*/
 // error handling
 app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
   if (err.name === 'UnauthorizedError') {

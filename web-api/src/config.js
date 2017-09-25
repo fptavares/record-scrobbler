@@ -7,5 +7,5 @@ export default {
   CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:3000',
   JWT_SECRET: process.env.JWT_SECRET || "It's a secret...",
   JWT_EXPIRES: process.env.JWT_EXPIRES || '3d',
-  //GRAPHIQL_USERNAME: process.env.GRAPHIQL_USERNAME
+  GRAPHIQL_USERNAME: process.env.GRAPHIQL_USERNAME
 }
