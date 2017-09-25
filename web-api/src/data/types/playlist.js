@@ -20,8 +20,9 @@ const GraphQLPlaylist = new GraphQLObjectType({
     items: {
       type: new GraphQLList(GraphQLAlbum),
       resolve: async({items}, args, {loaders}) => {
+        // load playlist albums
         const albums = await loaders.album.loadMany(Array.from(items.keys()));
-        console.log('albums:', albums);
+        // return albums with inPlaylist counter
         return albums.map(album => {
           if (!album) {
             return null;
