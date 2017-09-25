@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import config from './config';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -14,7 +15,7 @@ import LoggingInDiscogs from './components/LoggingInDiscogs';
 import LoggingInLastfm from './components/LoggingInLastfm';
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename={config.BASEPATH}>
     <div className="App">
       <Header />
       <section className="main">

@@ -2,6 +2,7 @@ import {
   commitMutation,
   graphql,
 } from 'react-relay';
+import config from '../config';
 
 const mutation = graphql`
   mutation AuthenticateDiscogsMutation($input: AuthenticateDiscogsInput!) {
@@ -23,7 +24,7 @@ function commit(environment, oauthVerifier) {
       },
       onCompleted: (response) => {
         localStorage.token = response.authenticateDiscogs.token;
-        window.location = '/';
+        window.location = config.BASEPATH + '/';
       },
     }
   );

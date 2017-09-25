@@ -1,6 +1,8 @@
 import React from 'react';
 import environment from '../createRelayEnvironment';
 import GetDiscogsRequestToken from '../mutations/GetDiscogsRequestToken';
+import config from '../config';
+
 import './Login.css';
 import discogsLogo from './images/discogs_logo_white.svg';
 
@@ -14,7 +16,8 @@ class Login extends React.Component {
     delete(localStorage.token);
     GetDiscogsRequestToken.commit(
       environment,
-      window.location.protocol+'//'+window.location.host+'/loginDiscogs'
+      window.location.protocol + '//' + window.location.host
+        + config.BASEPATH + '/loginDiscogs'
     );
   }
   render() {
