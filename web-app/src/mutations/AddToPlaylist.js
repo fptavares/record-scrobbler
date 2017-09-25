@@ -19,6 +19,9 @@ const mutation = graphql`
 `;
 
 function getOptimisticResponse(album, playlist) {
+  if (!playlist) {
+    return null;
+  }
   return {
     addToPlaylist: {
       album: {
