@@ -1,10 +1,11 @@
 {
-  "main.css": "static/css/main.9613e01c.css",
-  "main.css.map": "static/css/main.9613e01c.css.map",
-  "main.js": "static/js/main.87e3a993.js",
-  "main.js.map": "static/js/main.87e3a993.js.map",
+  "main.css": "static/css/main.c4100773.css",
+  "main.css.map": "static/css/main.c4100773.css.map",
+  "main.js": "static/js/main.8c57eb6d.js",
+  "main.js.map": "static/js/main.8c57eb6d.js.map",
   "static/media/discogs_logo_white.svg": "static/media/discogs_logo_white.93f94c3f.svg",
   "static/media/discogs_vinyl_record_mark.svg": "static/media/discogs_vinyl_record_mark.022e1ade.svg",
+  "static/media/github.svg": "static/media/github.cf7e8c13.svg",
   "static/media/lastfm.svg": "static/media/lastfm.8f5f860c.svg",
   "static/media/loading.svg": "static/media/loading.ec119390.svg",
   "static/media/logo.svg": "static/media/logo.c2ccc92f.svg"
