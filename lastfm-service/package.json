@@ -1,0 +1,37 @@
+{
+  "name": "lastfm-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/server.js --exec babel-node",
+    "debug": "nodemon src/server.js --inspect --exec babel-node",
+    "build": "gulp build",
+    "predeploy": "yarn build",
+    "deploy": "gcloud beta functions deploy lastfmService --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
+    "deploy-local": "functions deploy lastfmService --trigger-http --local-path=build",
+    "clean": "gulp clean"
+  },
+  "author": "Filipe Tavares",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/trace-agent": "^2.2.0",
+    "@google/cloud-debug": "^0.9.3",
+    "dotenv": "^4.0.0",
+    "express-jwt": "^5.3.0",
+    "jsonwebtoken": "^8.0.1",
+    "lastfmapi": "^0.1.1",
+    "lodash.chunk": "^4.2.0",
+    "modfun": "^0.1.1",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.4.1",
+    "express": "^4.15.5",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-eslint": "^4.0.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}
