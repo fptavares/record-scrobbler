@@ -3,7 +3,7 @@ import config from '../config';
 
 const client = axios.create({
   baseURL: config.DISCOGS_BASEURL,
-  timeout: 30000
+  timeout: config.DISCOGS_TIMEOUT
 });
 
 function authHeader(token) {

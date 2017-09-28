@@ -3,7 +3,7 @@ import config from '../config';
 
 const client = axios.create({
   baseURL: config.LASTFM_BASEURL,
-  timeout: 10000
+  timeout: config.LASTFM_TIMEOUT
 });
 
 function authHeader(token) {
