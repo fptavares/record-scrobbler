@@ -1,7 +1,7 @@
 export default {
   API_PORT: 4000,
   DISCOGS_BASEURL: process.env.DISCOGS_BASEURL || 'http://localhost:8010/record-scrobbler/us-central1/discogsService',
-  DISCOGS_TIMEOUT: process.env.DISCOGS_BASEURL || 30000,
+  DISCOGS_TIMEOUT: process.env.DISCOGS_TIMEOUT || 30000,
   LASTFM_BASEURL: process.env.LASTFM_BASEURL || 'http://localhost:8010/record-scrobbler/us-central1/lastfmService',
   LASTFM_TIMEOUT: process.env.LASTFM_TIMEOUT || 30000,
   REDIS_URL: process.env.REDIS_URL || '//localhost',
