@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var eslint = require('gulp-eslint');
-var gutil = require('gulp-util');
 
 var paths = {
   source: 'src',
@@ -29,9 +28,7 @@ gulp.task('build', ['copy-package.json', 'copy-dotenv'], function () {
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
     .pipe(babel())
-    /*.pipe(uglify()
-      .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
-    )*/
+    //.pipe(uglify())
     .pipe(gulp.dest(paths.build));
 });
 
