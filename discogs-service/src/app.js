@@ -17,7 +17,7 @@ async function handleGetCollection(req, res) {
   // process input
   const { username } = req.params;
   const { q, folder, after, size } = req.query;
-  const oauth = req.user;
+  const oauth = req.user.token;
   // get collection
   const {
     albums,
@@ -50,7 +50,7 @@ async function handleGetCollectionAlbum(req, res) {
 async function handleGetUser(req, res) {
   // process input
   const { username } = req.params;
-  const oauth = req.user;
+  const oauth = req.user.token;
   // get user
   const user = await getDiscogsUser(oauth, username);
   // respond to request
@@ -86,7 +86,10 @@ async function handleAuthenticate(req, res) {
   const userData = await authenticate(discogsRequestToken, discogsOauthVerifier);
   // sign discogs token as JWT
   const discogsToken = jsonwebtoken.sign(
-    userData.token,
+    {
+      username: userData.username,
+      token: userData.token
+    },
     config.JWT_SECRET,
     { expiresIn: config.JWT_EXPIRES }
   );
