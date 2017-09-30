@@ -28,6 +28,7 @@
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "body-parser": "^1.18.2",
+    "del": "^3.0.0",
     "eslint": "^4.4.1",
     "express": "^4.15.5",
     "gulp": "^3.9.1",
