@@ -1,4 +1,5 @@
 import express from 'express';
+import morgan from 'morgan';
 import graphQLHTTP from 'express-graphql';
 import cors from 'cors';
 import jwt from 'express-jwt';
@@ -20,6 +21,7 @@ initRedisClient();
 
 // create express application
 const app = express();
+app.use(morgan('tiny'));
 app.use(cors({
   origin: CORS_ORIGIN,
   maxAge: 600
@@ -33,7 +35,7 @@ app.use('/graphql', graphQLHTTP(req => {
   return {
     context: { user: req.user, loaders: createLoaders(req.user) },
     schema,
-    /*formatError: error => {
+    formatError: error => {
       console.error('Graphql error:', error);
       return {
         message: error.message,
@@ -41,7 +43,7 @@ app.use('/graphql', graphQLHTTP(req => {
         stack: error.stack,
         path: error.path
       };
-    }*/
+    }
   };
 }));
 // error handling

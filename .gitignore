@@ -32,6 +32,7 @@ jspm_packages/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.gcloud
 
 # misc
 .DS_Store

@@ -4,6 +4,9 @@ import config from '../config';
 let client;
 
 export function initRedisClient() {
+  if (!config.REDIS_PWD) {
+    throw new Error('Redis password not configured!');
+  }
   client = redis.createClient(config.REDIS_URL, {
     password: config.REDIS_PWD
   });

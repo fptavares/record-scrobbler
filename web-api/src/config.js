@@ -6,7 +6,7 @@ export default {
   LASTFM_TIMEOUT: process.env.LASTFM_TIMEOUT || 30000,
   REDIS_URL: process.env.REDIS_URL || '//localhost',
   REDIS_PWD: process.env.REDIS_PWD || null,
-  CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
   JWT_SECRET: process.env.JWT_SECRET || "It's a secret...",
   JWT_EXPIRES: process.env.JWT_EXPIRES || '3d',
   GRAPHIQL_USERNAME: process.env.GRAPHIQL_USERNAME
