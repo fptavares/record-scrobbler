@@ -4,6 +4,7 @@ import {
   graphql,
 } from 'react-relay';
 import environment from '../createRelayEnvironment';
+import config from '../config';
 import GetLastfmAuthenticationUrl from '../mutations/GetLastfmAuthenticationUrl';
 import './UserWidget.css';
 import lastfm from './images/lastfm_red_small.gif';
@@ -15,7 +16,8 @@ class UserWidget extends React.Component {
     e.preventDefault();
     GetLastfmAuthenticationUrl.commit(
       environment,
-      window.location.protocol+'//'+window.location.host+'/loginLastfm'
+      window.location.protocol + '//' + window.location.host
+        + config.BASEPATH +'/loginLastfm'
     );
   }
 
@@ -55,7 +57,7 @@ class UserWidget extends React.Component {
       lastfmUsername,
       discogsUser: { numCollection }
     } = this.props.viewer;
-    
+
     return (
       <div className="user-session">
       { username && this.renderDiscogsUser(username, numCollection) }

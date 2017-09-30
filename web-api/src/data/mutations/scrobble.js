@@ -1,15 +1,9 @@
 import { GraphQLInt } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
 
-import {
-  mutationWithClientMutationId,
-} from 'graphql-relay';
-
-import { GraphQLPlaylist } from '../types/playlist';
+import { GraphQLPlaylist, populatePlaylist } from '../types/playlist';
 import { scrobble } from '../lastfm-client';
-import {
-  clearPlaylist,
-  populatePlaylist
-} from '../playlist-client';
+import { clearPlaylist } from '../playlist-client';
 
 
 const GraphQLScrobbleMutation = mutationWithClientMutationId({

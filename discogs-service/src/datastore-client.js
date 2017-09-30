@@ -1,22 +1,28 @@
 import Datastore from '@google-cloud/datastore';
 import { normalizeResults } from './utils';
+import { GCLOUD_PROJECT } from './config';
 
 // Instantiates a client
 const datastore = Datastore({
-  projectId: 'record-scrobbler'
+  projectId: GCLOUD_PROJECT
 });
 
 async function getMany(kind, ids, parent=[], missingCallback, idField='id') {
+  console.time('getMany');
   const data = await datastore.get(ids.map(id => datastore.key([...parent, kind, id])));
+  console.timeEnd('getMany');
   return normalizeResults(
-    data[0], // for some reason, the results are wrapped around an array of 1 - https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/1.1.0/datastore?method=get
+    data[0], // the results are wrapped around an array of 1 - https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/1.1.0/datastore?method=get
     ids,
     idField,
     missingCallback
   );
 }
+
 async function getOne(kind, id, parent=[]) {
+  console.time('getOne');
   const data = await datastore.get(datastore.key([...parent, kind, id]));
+  console.timeEnd('getOne');
   return data[0];
 }
 
@@ -49,7 +55,9 @@ async function queryCollection(username, folder, search, after, size) {
     query = query.start(after);
   }
 
+  console.time('query');
   const [ albums, { endCursor, moreResults } ] = await query.run();
+  console.timeEnd('query');
 
   console.log("searchCollection moreResults:", moreResults);
 
@@ -88,7 +96,7 @@ const methods = {
   getReleases: (releaseIds, missingCallback) => getMany(
     "Release",
     releaseIds,
-    null,
+    [],
     missingCallback),
   getUser: username => getOne("User", username),
   // put

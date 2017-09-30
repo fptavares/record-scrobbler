@@ -19,17 +19,21 @@ export function getAuthenticationUrl(req, res) {
 }
 
 export function authenticate(req, res) {
-  const { token } = req.query;
+  const { token } = req.body;
 
   const lfm = new LastfmAPI(LAST_FM_API_KEY);
   lfm.authenticate(token, (err, session) => {
     if (err) {
-      return sendError(res, 500, 'AuthenticationFailed', err);
+      sendError(res, 500, 'AuthenticationFailed', err);
+      return;
     }
 
     // sign Last.fm token as JWT
     const lastfmToken = jsonwebtoken.sign(
-      session.key,
+      {
+        username: session.username,
+        token: session.key
+      },
       config.JWT_SECRET,
       { expiresIn: config.JWT_EXPIRES }
     );
@@ -45,7 +49,8 @@ export function authenticate(req, res) {
 export function getUser(req, res) {
   const [ username ] = req.params;
   if (!username) {
-    return sendError(res, 400, 'MissingUsername', 'Request did not provide username');
+    sendError(res, 400, 'MissingUsername', 'Request did not provide username');
+    return;
   }
 
   const lfm = new LastfmAPI(LAST_FM_API_KEY);
@@ -53,7 +58,8 @@ export function getUser(req, res) {
   // get user info from Last.fm
   lfm.user.getInfo(username, (err, info) => {
     if (err) {
-      return sendError(res, 500, 'UserFailed', err);
+      sendError(res, 500, 'UserFailed', err);
+      return;
     }
 
     // respond to request
@@ -68,11 +74,13 @@ export function getUser(req, res) {
 export function scrobble(req, res) {
   const [ username ] = req.params;
   if (!username) {
-    return sendError(res, 400, 'MissingUsername', 'Request did not provide username');
+    sendError(res, 400, 'MissingUsername', 'Request did not provide username');
+    return;
   }
   const tracks = req.body;
   if (!tracks || tracks.length === 0) {
-    return sendError(res, 400, 'MissingTracks', 'What did you want to scrobble again?');
+    sendError(res, 400, 'MissingTracks', 'What did you want to scrobble again?');
+    return;
   }
 
   scrobbleToLastfm(req.user.token, username, tracks)
@@ -105,9 +113,9 @@ function scrobbleToLastfm(token, username, tracks) {
 function sendError(res, httpStatus, code, message) {
   try {
     console.error(message);
-    return res.status(httpStatus).send({ code, message });
+    res.status(httpStatus).send({ code, message });
   } catch(err) {
     console.error(err);
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 }

@@ -22,8 +22,10 @@ function commit(environment, callbackUrl) {
         },
       },
       onCompleted: (response) => {
-        console.log('GetLastfmAuthenticationUrlMutation', response);
-        window.location.assign(response.getLastfmAuthenticationUrl.authenticationUrl);
+        const { authenticationUrl } = response.getLastfmAuthenticationUrl;
+        if (authenticationUrl) {
+          window.location.assign(authenticationUrl);
+        }
       },
       onError: err => console.error(err),
     }
