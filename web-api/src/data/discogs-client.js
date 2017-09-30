@@ -44,7 +44,7 @@ export function getDiscogsCollection(token, username, after, size, folder, searc
 
 export function getDiscogsCollectionAlbum(token, username, albumIds) {
   const formattedAlbumIds = albumIds.join(',');
-  return client.get(`/collection/${username}/album/${formattedAlbumIds}`, {
+  return client.get(`/collectionAlbum/${username}/${formattedAlbumIds}`, {
     headers: authHeader(token),
   }).then(resp => resp.data);
 }
