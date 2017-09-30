@@ -34,6 +34,7 @@ class QueryContainer extends Component {
       <QueryRenderer
         environment={environment}
         query={this.props.query}
+        variables={this.props.variables}
         render={(args) => this.renderContainer(
           args,
           this.props.back,

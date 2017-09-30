@@ -25,8 +25,8 @@ class UserWidget extends React.Component {
     return (
       <div className="user">
         <img className="avatar" src={discogsIcon} alt="" />
-        <label>{username}</label>
-        <label> (<strong>{numCollection}</strong> albums)</label>
+        {username}
+        {numCollection && <span> (<strong>{numCollection}</strong> albums)</span>}
       </div>
     );
   }
@@ -35,7 +35,7 @@ class UserWidget extends React.Component {
     return (
       <div className="user">
         <img className="avatar" src={lastfmIcon} alt="" />
-        <label>{username}</label>
+        {username}
       </div>
     );
   }
@@ -55,8 +55,10 @@ class UserWidget extends React.Component {
     const {
       username,
       lastfmUsername,
-      discogsUser: { numCollection }
+      discogsUser
     } = this.props.viewer;
+
+    const numCollection = discogsUser ? discogsUser.numCollection : null;
 
     return (
       <div className="user-session">

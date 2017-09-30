@@ -5,6 +5,7 @@ import {
   graphql,
 } from 'react-relay';
 import Album from './Album';
+import ErrorPage from './ErrorPage';
 import FunctionLink from './FunctionLink';
 import SearchWidget from './SearchWidget';
 import './Collection.css';
@@ -91,6 +92,10 @@ class Collection extends React.Component {
   }
 
   render() {
+    if (!this.props.viewer.collection) {
+      return <ErrorPage error={{code: 'RequiresCollection'}} />;
+    }
+    
     return (
       <div>
         <div className="main-intro">

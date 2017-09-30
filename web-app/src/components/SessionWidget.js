@@ -4,6 +4,7 @@ import {
   createFragmentContainer,
   graphql,
 } from 'react-relay';
+import config from '../config';
 import Scrobble from '../mutations/Scrobble';
 import FunctionLink from './FunctionLink';
 import './SessionWidget.css';
@@ -68,8 +69,8 @@ class SessionWidget extends React.Component {
         {
           (this.state.scrobbleResult &&
             this.renderScrobbleResult()
-          ) ||
-          (playlist && playlist.numItems &&
+          )
+          || (playlist && playlist.numItems &&
             <div>
               <Link to="/playlist">
                 Your playlist has <strong>{playlist.numItems}</strong> albums
@@ -82,11 +83,11 @@ class SessionWidget extends React.Component {
               </span>}
               .
             </div>
-          ) ||
-          <div>Your playlist is <strong>empty</strong>.</div>
+          )
+          || <div>Your playlist is <strong>empty</strong>.</div>
         }
         <div className="logout">
-          <a href='/' onClick={this._handleLogout}>Logout</a>
+          <a href={config.BASEPATH + '/'} onClick={this._handleLogout}>Logout</a>
         </div>
       </div>
     );

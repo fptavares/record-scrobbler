@@ -36,6 +36,7 @@ function fetchQuery(operation, variables) {
     console.log('response:', json);
     // https://github.com/facebook/relay/issues/1816
     if (operation.query.operation === 'mutation' && json.errors) {
+    //if (json.errors) {
       return Promise.reject({
         message: json.errors.map(e => e.message).join('<br/>')
       });

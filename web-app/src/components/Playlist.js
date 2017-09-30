@@ -4,6 +4,7 @@ import {
   graphql,
 } from 'react-relay';
 import Album from './Album';
+import ErrorPage from './ErrorPage';
 
 
 class Playlist extends React.Component {
@@ -18,6 +19,10 @@ class Playlist extends React.Component {
   }
 
   render() {
+    if (!this.props.viewer.playlist) {
+      return <ErrorPage error={{code: 'RequiresPlaylist'}} />;
+    }
+
     const { items } = this.props.viewer.playlist;
     return (
       <div className="sleeves">
