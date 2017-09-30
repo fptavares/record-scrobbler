@@ -14,7 +14,8 @@ class SessionWidget extends React.Component {
     super(props);
     this._handleScrobble = this._handleScrobble.bind(this);
     this._onScrobbleSuccess = this._onScrobbleSuccess.bind(this);
-    this._removeSuccessMessage = this._removeSuccessMessage.bind(this);
+    this._onScrobbleError = this._onScrobbleError.bind(this);
+    this._removeScrobbleMessage = this._removeScrobbleMessage.bind(this);
     this.state = {};
   }
 
@@ -31,14 +32,16 @@ class SessionWidget extends React.Component {
   }
 
   _onScrobbleError() {
-    // TODO
+    setTimeout(this._removeScrobbleMessage, 10000);
+    this.setState({
+      scrobbleResult: {
+        error: 'Failed to scrobble tracks!'
+      }
+    });
   }
 
-  _removeSuccessMessage() {
-    this.setState({ scrobbleResult: null });
-  }
   _onScrobbleSuccess(accepted, ignored) {
-    setTimeout(this._removeSuccessMessage, 5000);
+    setTimeout(this._removeScrobbleMessage, 5000);
     this.setState({
       scrobbleResult: {
         accepted,
@@ -47,10 +50,19 @@ class SessionWidget extends React.Component {
     });
   }
 
+  _removeScrobbleMessage() {
+    this.setState({ scrobbleResult: null });
+  }
+
   renderScrobbleResult() {
-    const { accepted, ignored } = this.state.scrobbleResult;
+    // Error
+    const { accepted, ignored, error } = this.state.scrobbleResult;
+    if (error) {
+      return <div style={{ color: '#FF6C46' }}><strong>{error}</strong></div>;
+    }
+    // Success
     return (
-      <div style={{ color: '#beb'}}>
+      <div style={{ color: '#beb' }}>
         {accepted > 0 &&
           <span>Scrobbled <strong>{accepted}</strong> tracks.</span>
         }

@@ -47,7 +47,7 @@ function commit(environment, playlist, successCallback, errorCallback) {
           const { accepted, ignored } = response.scrobble;
           successCallback(accepted, ignored);
         } else {
-          errorCallback && errorCallback(); // TODO
+          errorCallback();
         }
       },
       onError: errorCallback,
