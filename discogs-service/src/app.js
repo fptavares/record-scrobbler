@@ -1,7 +1,6 @@
-import express from 'express';
+import modfun from 'modfun';
 import morgan from 'morgan';
 import jwt from 'express-jwt';
-import modfun from 'modfun';
 import config from './config';
 import {
   getDiscogsCollection,
