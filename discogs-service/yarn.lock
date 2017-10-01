@@ -2860,9 +2860,9 @@ modelo@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/modelo/-/modelo-4.2.0.tgz#3b4b420023a66ca7e32bdba16e710937e14d1b0b"
 
-modfun@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/modfun/-/modfun-0.2.0.tgz#c1e6b6fda6d51b80b648ed9c794a8cc75517134b"
+modofun@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/modofun/-/modofun-0.3.0.tgz#b6c86813536e6489c01849694b238fbc9859e8b4"
 
 moment@2.x.x:
   version "2.18.1"

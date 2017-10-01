@@ -6,13 +6,13 @@ import {
   getUser,
   scrobble
 } from './lastfm-controller';
-import modfun from 'modfun';
+import modofun from 'modofun';
 import config from './config';
 
 const authorize = jwt({ secret: config.JWT_SECRET });
 const logger = morgan('tiny');
 
-const app = modfun(
+const app = modofun(
   {
     authenticationUrl: getAuthenticationUrl,
     authenticate: authenticate,

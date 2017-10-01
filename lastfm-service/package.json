@@ -21,7 +21,7 @@
     "jsonwebtoken": "^8.0.1",
     "lastfmapi": "^0.1.1",
     "lodash.chunk": "^4.2.0",
-    "modfun": "^0.2.0",
+    "modofun": "^0.3.0",
     "morgan": "^1.8.2"
   },
   "devDependencies": {

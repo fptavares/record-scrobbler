@@ -1,4 +1,4 @@
-import modfun from 'modfun';
+import modofun from 'modofun';
 import morgan from 'morgan';
 import jwt from 'express-jwt';
 import config from './config';
@@ -16,14 +16,14 @@ const logger = morgan('tiny');
 const authorize = jwt({ secret: config.JWT_SECRET });
 
 // define routes
-const app = modfun(
+const app = modofun(
   {
     requestToken: getOauthRequestToken,
     authenticate: authenticate,
-    user: [authorize, modfun.arity(1), getDiscogsUser],
-    collection: [authorize, modfun.arity(1), getDiscogsCollection],
-    collectionAlbum: [authorize, modfun.arity(2), getDiscogsCollectionAlbum],
-    release: [authorize, modfun.arity(1), getDiscogsRelease]
+    user: [authorize, modofun.arity(1), getDiscogsUser],
+    collection: [authorize, modofun.arity(1), getDiscogsCollection],
+    collectionAlbum: [authorize, modofun.arity(2), getDiscogsCollectionAlbum],
+    release: [authorize, modofun.arity(1), getDiscogsRelease]
   },
   {
     mode: 'function',
