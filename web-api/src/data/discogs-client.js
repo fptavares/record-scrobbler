@@ -11,7 +11,7 @@ function authHeader(token) {
 }
 
 export async function getDiscogsRequestToken(callbackUrl) {
-  const { data } = await client.get('/oauth/requestToken', {
+  const { data } = await client.get('/requestToken', {
     params: { cb: callbackUrl },
   });
 
@@ -22,7 +22,7 @@ export async function getDiscogsRequestToken(callbackUrl) {
 }
 
 export function authenticateDiscogs(discogsRequestToken, discogsOauthVerifier) {
-  return client.post('/oauth/authenticate', {
+  return client.post('/authenticate', {
     discogsRequestToken,
     discogsOauthVerifier, // Verification code sent back by Discogs
   }).then(resp => resp.data);
