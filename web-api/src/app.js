@@ -1,4 +1,4 @@
-import express from 'express';
+import modofun from 'modofun';
 import morgan from 'morgan';
 import graphQLHTTP from 'express-graphql';
 import cors from 'cors';
@@ -12,48 +12,28 @@ import config from './config';
 
 const {
   CORS_ORIGIN,
-  JWT_SECRET,
-  //GRAPHIQL_USERNAME
+  JWT_SECRET
 } = config;
 
 // instatiate Redis client on app load
 initRedisClient();
 
-// create express application
-const app = express();
-app.use(morgan('tiny'));
-app.use(cors({
+// instantiate middlewares
+const logger = morgan('tiny');
+const corsHeaders = cors({
   origin: CORS_ORIGIN,
   maxAge: 600
-}));
-app.use(jwt({
+});
+const authorize = jwt({
   secret: JWT_SECRET,
   credentialsRequired: false,
-}));
-
-app.use('/graphql', graphQLHTTP(req => {
-  return {
-    context: { user: req.user, loaders: createLoaders(req.user) },
-    schema,
-    formatError: error => {
-      console.error('Graphql error:', error);
-      return {
-        message: error.message,
-        locations: error.locations,
-        stack: error.stack,
-        path: error.path
-      };
-    }
-  };
-}));
-// error handling
-app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
-  if (err.name === 'UnauthorizedError') {
-    res.status(401).json({message: 'Invalid token'});
-  } else {
-    console.error(err);
-    res.status(500).json({message: err.message})
-  }
 });
 
-export default app;
+// instantiate GraphQL handler
+const graphql = graphQLHTTP(req => ({
+  context: { user: req.user, loaders: createLoaders(req.user) },
+  schema
+}));
+
+// create application
+export default modofun({ graphql }, [logger, corsHeaders, authorize]);
