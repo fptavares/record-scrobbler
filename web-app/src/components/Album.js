@@ -19,14 +19,14 @@ class Album extends React.Component {
     RemoveFromPlaylist.commit(
       this.props.relay.environment,
       this.props.album,
-      this.props.viewer.playlist,
+      this.props.viewer,
     );
   }
   _handleSleeveClick() {
     AddToPlaylist.commit(
       this.props.relay.environment,
       this.props.album,
-      this.props.viewer.playlist,
+      this.props.viewer,
     );
   }
 

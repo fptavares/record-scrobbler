@@ -5,7 +5,7 @@ input AddToPlaylistInput {
 
 type AddToPlaylistPayload {
   album: Album
-  playlist: Playlist
+  viewer: Viewer
   clientMutationId: String
 }
 
@@ -166,7 +166,7 @@ input RemoveFromPlaylistInput {
 
 type RemoveFromPlaylistPayload {
   album: Album
-  playlist: Playlist
+  viewer: Viewer
   clientMutationId: String
 }
 

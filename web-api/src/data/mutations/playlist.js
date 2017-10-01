@@ -9,10 +9,7 @@ import {
 } from 'graphql-relay';
 
 import { GraphQLAlbum } from '../types/album';
-import {
-  GraphQLPlaylist,
-  resolvePlaylist
-} from '../types/playlist';
+import { GraphQLViewer, resolveViewer } from '../types/viewer';
 
 import {
   addToPlaylist,
@@ -30,9 +27,9 @@ const GraphQLAddToPlaylistMutation = mutationWithClientMutationId({
       type: GraphQLAlbum,
       resolve: ({item}) => ({ id: item.albumId, inPlaylist: item.count }),
     },
-    playlist: {
-      type: GraphQLPlaylist,
-      resolve: resolvePlaylist,
+    viewer: {
+      type: GraphQLViewer,
+      resolve: resolveViewer
     }
   },
   mutateAndGetPayload: async({albumId}, {user}) => ({
@@ -51,9 +48,9 @@ const GraphQLRemoveFromPlaylistMutation = mutationWithClientMutationId({
       type: GraphQLAlbum,
       resolve: ({item}) => ({ id: item.albumId, inPlaylist: item.count }),
     },
-    playlist: {
-      type: GraphQLPlaylist,
-      resolve: resolvePlaylist,
+    viewer: {
+      type: GraphQLViewer,
+      resolve: resolveViewer
     }
   },
   mutateAndGetPayload: async({albumId}, {user}) => ({

@@ -13,6 +13,7 @@ const mutation = graphql`
         numItems
         items {
           id
+          inPlaylist
         }
       }
     }

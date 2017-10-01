@@ -10,28 +10,35 @@ const mutation = graphql`
         id
         inPlaylist
       }
-      playlist {
+      viewer {
         id
-        numItems
+        playlist {
+          id
+          numItems
+        }
       }
     }
   }
 `;
 
-function getOptimisticResponse(album, playlist) {
-  if (!playlist) {
+function getOptimisticResponse(album, viewer) {
+  if (!viewer || !viewer.playlist) {
     return null;
   }
+  const { playlist } = viewer;
   return {
     removeFromPlaylist: {
       album: {
         id: album.id,
         inPlaylist: null,
       },
-      playlist: {
-        id: playlist.id,
-        numItems: playlist.numItems-1,
-      },
+      viewer: {
+        id: viewer.id,
+        playlist: {
+          id: playlist.id,
+          numItems: playlist.numItems-1,
+        },
+      }
     },
   };
 }

@@ -49,7 +49,14 @@ const GraphQLScrobbleMutation = mutationWithClientMutationId({
     if (ignored === 0) { // everything successfuly scrobbled
       const isCleared = await clearPlaylist(username); // so clear playlist
       if (isCleared) {
-        playlist = populatePlaylist(username, new Map([])); // and update the client
+        // and update the client
+        playlist = populatePlaylist(
+          username,
+          new Map(albums.map(album => [
+            album.id,
+            null
+          ]))
+        );
       }
     }
 
