@@ -103,10 +103,12 @@ function getDiscogsRelease(releaseIdsCSV) {
   // process input
   const releaseIds = releaseIdsCSV.split(',').map(id => parseInt(id));
   // get releases
-  return db.getReleases(releaseIds, id => loadReleaseFromDiscogs(id));
+  // no easy solution to expire the release cache, so not storing it
+  //return db.getReleases(releaseIds, id => loadReleaseFromDiscogs(id));
+  return Promise.all(releaseIds.map(id => discogs.loadRelease(id))); // get and don't store in DB
 }
 
-async function loadReleaseFromDiscogs(releaseId) {
+/*async function loadReleaseFromDiscogs(releaseId) {
   try {
     // load release
     const release = await discogs.loadRelease(releaseId);
@@ -122,7 +124,7 @@ async function loadReleaseFromDiscogs(releaseId) {
     // other releases might of succeded so we shouldn't break the whole request
     return null;
   }
-}
+}*/
 
 export {
   getOauthRequestToken,
