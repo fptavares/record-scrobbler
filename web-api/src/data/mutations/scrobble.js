@@ -1,6 +1,7 @@
-import { GraphQLInt } from 'graphql';
+import { GraphQLInt, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 
+import { GraphQLAlbum } from '../types/album';
 import { GraphQLPlaylist, populatePlaylist } from '../types/playlist';
 import { scrobble } from '../lastfm-client';
 import { clearPlaylist } from '../playlist-client';
@@ -12,6 +13,7 @@ const GraphQLScrobbleMutation = mutationWithClientMutationId({
     accepted: { type: GraphQLInt },
     ignored: { type: GraphQLInt },
     playlist: { type: GraphQLPlaylist },
+    scrobbledAlbums: { type: new GraphQLList(GraphQLAlbum) }
   },
   mutateAndGetPayload: async(args, {user, loaders}) => {
     if (!user || !user.username) {
@@ -46,17 +48,16 @@ const GraphQLScrobbleMutation = mutationWithClientMutationId({
     const { accepted, ignored } = await scrobble(lastfmToken, lastfmUsername, releases);
 
     let playlist = null;
+    let scrobbledAlbums = null;
     if (ignored === 0) { // everything successfuly scrobbled
       const isCleared = await clearPlaylist(username); // so clear playlist
       if (isCleared) {
         // and update the client
-        playlist = populatePlaylist(
-          username,
-          new Map(albums.map(album => [
-            album.id,
-            null
-          ]))
-        );
+        playlist = populatePlaylist(username, new Map([]));
+        scrobbledAlbums = albums.map(album => {
+          album.inPlaylist = null;
+          return album;
+        });
       }
     }
 
@@ -64,6 +65,7 @@ const GraphQLScrobbleMutation = mutationWithClientMutationId({
       accepted,
       ignored,
       playlist,
+      scrobbledAlbums
     }
   },
 });

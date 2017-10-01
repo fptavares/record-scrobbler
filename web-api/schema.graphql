@@ -178,6 +178,7 @@ type ScrobblePayload {
   accepted: Int
   ignored: Int
   playlist: Playlist
+  scrobbledAlbums: [Album]
   clientMutationId: String
 }
 

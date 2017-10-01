@@ -11,10 +11,10 @@ const mutation = graphql`
       playlist {
         id
         numItems
-        items {
-          id
-          inPlaylist
-        }
+      }
+      scrobbledAlbums {
+        id
+        inPlaylist
       }
     }
   }
@@ -30,6 +30,7 @@ function getOptimisticResponse(playlist) {
         numItems: 0,
         items: [],
       },
+      scrobbledAlbums: [],
     },
   };
 }
