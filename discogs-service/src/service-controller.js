@@ -12,9 +12,10 @@ function getOauthRequestToken({query: {cb}}) {
   return discogs.loadRequestToken(cb);
 }
 
-function authenticate({body: {discogsRequestToken, oauthVerifier}}) {
+async function authenticate({body}) {
+  const { discogsRequestToken, discogsOauthVerifier } = body;
   // Authenticate by consumer key and secret
-  const userData = discogs.authenticate(discogsRequestToken, oauthVerifier);
+  const userData = await discogs.authenticate(discogsRequestToken, discogsOauthVerifier);
   // sign discogs token as JWT
   const discogsToken = jsonwebtoken.sign(
     {
