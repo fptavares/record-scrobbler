@@ -8,8 +8,8 @@
     "start-db-emulator": "gcloud beta emulators datastore start --no-store-on-disk",
     "build": "gulp build",
     "predeploy": "yarn build",
-    "deploy": "gcloud beta functions deploy discogsService --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
-    "deploy-local": "functions deploy discogsService --trigger-http --local-path=build",
+    "deploy": "gcloud beta functions deploy discogs --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
+    "deploy-local": "functions deploy discogs --trigger-http --local-path=build",
     "clean": "gulp clean"
   },
   "author": "Filipe Tavares",

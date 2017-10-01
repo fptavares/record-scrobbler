@@ -4,4 +4,4 @@ require('@google-cloud/debug-agent').start();
 var app = require('./app').default;
 
 // pass express app as function handler
-exports.apiService = app;
+exports.api = app;

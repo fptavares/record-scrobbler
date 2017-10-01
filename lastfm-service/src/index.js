@@ -4,4 +4,4 @@ require('@google-cloud/debug-agent').start();
 var app = require('./app').default;
 
 // pass custom app as function handler
-exports.lastfmService = app
+exports.lastfm = app
