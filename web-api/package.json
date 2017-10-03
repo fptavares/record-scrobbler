@@ -25,7 +25,7 @@
     "graphql": ">0.10.0",
     "graphql-relay": ">0.5.1",
     "jsonwebtoken": "^7.4.1",
-    "modofun": "^0.3.0",
+    "modofun": "*",
     "morgan": "^1.9.0",
     "redis": "^2.7.1"
   },
