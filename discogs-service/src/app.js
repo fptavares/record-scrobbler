@@ -16,7 +16,7 @@ const logger = morgan('tiny');
 const authorize = jwt({ secret: config.JWT_SECRET });
 
 // define routes
-const app = modofun(
+const app = modofun.function(
   {
     requestToken: getOauthRequestToken,
     authenticate: authenticate,
@@ -25,10 +25,7 @@ const app = modofun(
     collectionAlbum: [authorize, modofun.arity(2), getDiscogsCollectionAlbum],
     release: [authorize, modofun.arity(1), getDiscogsRelease]
   },
-  {
-    mode: 'function',
-    middleware: [logger]
-  }
+  [logger]
 );
 
 export default app;
