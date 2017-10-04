@@ -11,6 +11,9 @@ const mutation = graphql`
       playlist {
         id
         numItems
+        items {
+          id
+        }
       }
       scrobbledAlbums {
         id
