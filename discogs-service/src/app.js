@@ -20,10 +20,10 @@ const app = modofun(
   {
     requestToken: getOauthRequestToken,
     authenticate: authenticate,
-    user: [authorize, modofun.arity(1), getDiscogsUser],
-    collection: [authorize, modofun.arity(1), getDiscogsCollection],
-    collectionAlbum: [authorize, modofun.arity(2), getDiscogsCollectionAlbum],
-    release: [authorize, modofun.arity(1), getDiscogsRelease]
+    user: [authorize, getDiscogsUser],
+    collection: [authorize, getDiscogsCollection],
+    collectionAlbum: [authorize, getDiscogsCollectionAlbum],
+    release: [authorize, getDiscogsRelease]
   },
   [logger]
 );
