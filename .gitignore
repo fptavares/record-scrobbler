@@ -37,3 +37,5 @@ jspm_packages/
 
 # misc
 .DS_Store
+lambdatest/
+aws-config.json
