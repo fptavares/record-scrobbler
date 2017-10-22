@@ -19,7 +19,10 @@ const app = modofun(
     user: [authorize, getUser],
     scrobble: [authorize, scrobble]
   },
-  [logger]
+  {
+    mode: 'reqres',
+    middleware: [logger]
+  }
 );
 
 export default app

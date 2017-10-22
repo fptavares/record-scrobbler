@@ -36,4 +36,7 @@ const graphql = graphQLHTTP(req => ({
 }));
 
 // create application
-export default modofun({ graphql }, [logger, corsHeaders, authorize]);
+export default modofun({ graphql }, {
+  mode: 'reqres',
+  middleware: [logger, corsHeaders, authorize],
+});
