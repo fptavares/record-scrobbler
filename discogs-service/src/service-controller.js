@@ -7,13 +7,13 @@ import config from './config';
  * Authentication
  */
 
-function getOauthRequestToken({query: {cb}}) {
+function getOauthRequestToken() {
   // get request token
-  return discogs.loadRequestToken(cb);
+  return discogs.loadRequestToken(this.query.cb);
 }
 
-async function authenticate({body}) {
-  const { discogsRequestToken, discogsOauthVerifier } = body;
+async function authenticate() {
+  const { discogsRequestToken, discogsOauthVerifier } = this.body;
   // Authenticate by consumer key and secret
   const userData = await discogs.authenticate(discogsRequestToken, discogsOauthVerifier);
   // sign discogs token as JWT
@@ -44,10 +44,10 @@ function getDiscogsUser(username) {
  * Discogs User Collection
  */
 
-async function getDiscogsCollection(username, {user, query}) {
+async function getDiscogsCollection(username) {
   // process input
-  const { q: search, folder, after, size=30 } = query;
-  const { token } = user;
+  const { q: search, folder, after, size=30 } = this.query;
+  const { token } = this.user;
 
   // execute query
   const results = await db.queryCollection(
