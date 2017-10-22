@@ -1,4 +1,5 @@
-import modofun from 'modofun';
+require('dotenv').config();
+const modofun = require('./modofun');
 import morgan from 'morgan';
 import jwt from 'express-jwt';
 import config from './config';
@@ -16,16 +17,18 @@ const logger = morgan('tiny');
 const authorize = jwt({ secret: config.JWT_SECRET });
 
 // define routes
-const app = modofun(
+exports.handler = modofun(
   {
     requestToken: getOauthRequestToken,
     authenticate: authenticate,
-    user: [authorize, getDiscogsUser],
-    collection: [authorize, getDiscogsCollection],
-    collectionAlbum: [authorize, getDiscogsCollectionAlbum],
-    release: [authorize, getDiscogsRelease]
+    user: [authorize, modofun.arity(1), getDiscogsUser],
+    collection: [authorize, modofun.arity(1), getDiscogsCollection],
+    collectionAlbum: [authorize, modofun.arity(2), getDiscogsCollectionAlbum],
+    release: [authorize, modofun.arity(1), getDiscogsRelease]
   },
-  [logger]
+  {
+    middleware: [logger],
+    type: 'aws',
+    mode: 'function'
+  }
 );
-
-export default app;

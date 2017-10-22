@@ -4,5 +4,8 @@ module.exports = {
   DISCOGS_CONSUMER_SECRET: process.env.DISCOGS_CONSUMER_SECRET,
   JWT_SECRET: process.env.JWT_SECRET || "It's a secret...",
   JWT_EXPIRES: process.env.JWT_EXPIRES || '7d',
-  GCLOUD_PROJECT: process.env.GCLOUD_PROJECT || 'record-scrobbler'
+  GCLOUD_PROJECT: process.env.GCLOUD_PROJECT || 'record-scrobbler',
+  AWS_REGION: process.env.AWS_REGION || 'eu-central-1',
+  COLLECTION_TTL: 60*60*6,
+  RELEASE_TTL: 60*60*24*7
 }
