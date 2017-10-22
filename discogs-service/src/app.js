@@ -1,4 +1,4 @@
-import modofun from 'modofun';
+import modofun from './modofun';
 import morgan from 'morgan';
 import jwt from 'express-jwt';
 import config from './config';
