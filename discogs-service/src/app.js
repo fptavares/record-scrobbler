@@ -16,7 +16,7 @@ const logger = morgan('tiny');
 const authorize = jwt({ secret: config.JWT_SECRET });
 
 // define routes
-const app = modofun.function(
+const app = modofun(
   {
     requestToken: getOauthRequestToken,
     authenticate: authenticate,
