@@ -42,11 +42,11 @@
     util.promisify "^1.0.0"
 
 "@google-cloud/trace-agent@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/trace-agent/-/trace-agent-2.2.0.tgz#13fbee4a324dee3f9eea95040dd824feeca39ecc"
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/trace-agent/-/trace-agent-2.3.0.tgz#e38453e30ad02810b21ae3187f6f27987dbdc610"
   dependencies:
     "@google-cloud/common" "^0.13.2"
-    continuation-local-storage "^3.1.4"
+    continuation-local-storage "^3.2.0"
     extend "^3.0.0"
     gcp-metadata "^0.2.0"
     is "^3.2.0"
@@ -1032,7 +1032,7 @@ content-type@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
 
-continuation-local-storage@^3.1.4:
+continuation-local-storage@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/continuation-local-storage/-/continuation-local-storage-3.2.0.tgz#e19fc36b597090a5d4e4a3b2ea3ebc5e29694a24"
   dependencies:
@@ -2802,8 +2802,8 @@ modelo@^4.2.0:
   resolved "https://registry.yarnpkg.com/modelo/-/modelo-4.2.0.tgz#3b4b420023a66ca7e32bdba16e710937e14d1b0b"
 
 modofun@*:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/modofun/-/modofun-0.4.0.tgz#1fd3b96d96777d0775cb0740d7a633eacaa5ca3e"
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/modofun/-/modofun-0.4.1.tgz#834f183611fd6547b9030c4ab3687d94d84fedd7"
 
 moment@2.x.x:
   version "2.18.1"

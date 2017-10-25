@@ -18,6 +18,8 @@ pids
 bower_components
 
 build/
+dist/
+dist.zip
 
 # Dependency directories
 node_modules/

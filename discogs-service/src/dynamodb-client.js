@@ -26,8 +26,10 @@ function getOne(tableName, key) {
     Key: key
   };
 
+  console.time('getOne');
   return new Promise(
     (resolve, reject) => dynamodb.get(params, function(err, data) {
+      console.timeEnd('getOne');
       if (err) {
         return reject(err);
       }
@@ -45,20 +47,22 @@ function getMany(tableName, keys) {
     }
   };
 
+  console.time('getMany');
   return new Promise(
     (resolve, reject) => dynamodb.batchGet(params, function(err, data) {
+      console.timeEnd('getMany');
       if (err) {
         return reject(err);
       }
-      resolve(data.Responses);
-      console.log(data);
+      resolve(data.Responses.CollectionAlbum);
     })
   );
 }
 
-function put(tableName, values, ttl) {
+function put(tableName, values, ttl, timeRef) {
+  const now = timeRef || Math.floor(Date.now() / 1000);
   const item = {
-    ttl: Math.floor(Date.now() / 1000) + ttl,
+    ttl: now + ttl,
     ...values,
   };
   const params = {
@@ -77,15 +81,16 @@ function put(tableName, values, ttl) {
 }
 
 function putUserCollection(username, user, collection) {
+  const timeRef = Math.floor(Date.now() / 1000); // make sure all expire at the same time
   const putOps = [];
   // Add user
   user.username = username;
-  putOps.push(put('User', user, config.COLLECTION_TTL));
+  putOps.push(put('User', user, config.COLLECTION_TTL, timeRef));
   // Add collection
   collection.forEach(album  => {
     album.username = username;
     album.search = album.artist.toLowerCase() + ' ' + album.title.toLowerCase();
-    putOps.push(put('CollectionAlbum', album, config.COLLECTION_TTL));
+    putOps.push(put('CollectionAlbum', album, config.COLLECTION_TTL, timeRef));
   });
 
   return Promise.all(putOps);
@@ -163,7 +168,7 @@ const methods = {
   // get
   getCollectionAlbums: (username, albumIds) => getMany(
     "CollectionAlbum",
-    albumIds.map(id => { username, id })
+    albumIds.map(id => ({ username, id }))
   ),
   getUser: (username) => getOne(
     "User",
