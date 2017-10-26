@@ -12,12 +12,12 @@ import config from './config';
 const authorize = jwt({ secret: config.JWT_SECRET });
 const logger = morgan('tiny');
 
-const app = modofun(
+const app = modofun.gcloud(
   {
     authenticationUrl: getAuthenticationUrl,
     authenticate: authenticate,
-    user: [authorize, getUser],
-    scrobble: [authorize, scrobble]
+    user: [authorize, modofun.arity(1), getUser],
+    scrobble: [authorize, modofun.arity(1), scrobble]
   },
   {
     mode: 'reqres',
