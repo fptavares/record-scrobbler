@@ -176,9 +176,24 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-sdk@^2.121.0, aws-sdk@^2.135.0:
+aws-sdk@^2.121.0:
   version "2.140.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.140.0.tgz#c15fc5c3db7a1805c59f85767eb1067ae34f9ae4"
+  dependencies:
+    buffer "4.9.1"
+    crypto-browserify "1.0.9"
+    events "^1.1.1"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.17"
+    xmlbuilder "4.2.1"
+
+aws-sdk@^2.135.0:
+  version "2.141.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.141.0.tgz#3d96a5970fd9f540ceabcc1d4baeb33b71583aa7"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -2574,8 +2589,8 @@ minimist@^1.1.0, minimist@^1.2.0:
     minimist "0.0.8"
 
 modofun@*:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/modofun/-/modofun-0.4.1.tgz#834f183611fd6547b9030c4ab3687d94d84fedd7"
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/modofun/-/modofun-0.4.3.tgz#b45adf13e09ad6e0000d7bacf941b8e3adefd679"
 
 moment@2.x.x:
   version "2.18.1"
