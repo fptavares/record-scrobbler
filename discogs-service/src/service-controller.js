@@ -1,6 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 import discogs from './discogs-client';
-import db from './datastore-client';
+import db from './dynamodb-client';
 import config from './config';
 
 /*
@@ -50,26 +50,14 @@ async function getDiscogsCollection(username) {
   const { token } = this.user;
 
   // execute query
-  const results = await db.queryCollection(
-    username,
-    parseInt(folder),
-    search,
-    after,
-    parseInt(size)
-  );
+  const results = await db.queryCollection(username, folder, search, after, size);
 
   // load collection if it's an unfiltered first request
   if ((!results.albums || results.albums.length === 0) && !after && !search && !folder) {
     // load Discogs user and collection
     await loadUserCollectionFromDiscogs(token, username);
     // re-execute query
-    return db.queryCollection(
-      username,
-      parseInt(folder),
-      search,
-      after,
-      parseInt(size)
-    );
+    return db.queryCollection(username, folder, search, after, size);
   }
 
   // return collection albums

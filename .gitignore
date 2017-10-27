@@ -18,6 +18,8 @@ pids
 bower_components
 
 build/
+dist/
+dist.zip
 
 # Dependency directories
 node_modules/
@@ -37,3 +39,5 @@ jspm_packages/
 
 # misc
 .DS_Store
+lambdatest/
+aws-config.json
