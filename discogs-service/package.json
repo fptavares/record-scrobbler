@@ -8,14 +8,13 @@
     "start-lambda": "sam local start-api",
     "start-db-emulator": "docker run -p 8000:8000 dwmkerr/dynamodb",
     "build": "gulp build",
-    "predeploy": "yarn build",
-    "deploy": "gcloud beta functions deploy discogs --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
-    "deploy-local": "functions deploy discogs --trigger-http --local-path=build",
+    "deploy": "gulp deploy-aws",
     "clean": "gulp clean"
   },
   "author": "Filipe Tavares",
   "license": "MIT",
   "dependencies": {
+    "aws-xray-sdk": "^1.1.4",
     "disconnect": "^1.0.2",
     "dotenv": "^4.0.0",
     "express-jwt": "^5.3.0",

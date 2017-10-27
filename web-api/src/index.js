@@ -5,5 +5,5 @@ require('@google-cloud/trace-agent').start({
 require('@google-cloud/debug-agent').start();
 var app = require('./app').default;
 
-// pass modofun app as function handler
+// export modofun app as function handler
 exports.api = app;

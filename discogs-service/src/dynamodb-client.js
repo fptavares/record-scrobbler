@@ -1,7 +1,17 @@
-import AWS from "aws-sdk";
+const https = require('https');
+const AWSXRay = require('aws-xray-sdk');
+const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 import config from './config';
 
-AWS.config.update({region: config.AWS_REGION});
+AWS.config.update({
+  region: config.AWS_REGION,
+  httpOptions: {
+    agent: new https.Agent({
+      rejectUnauthorized: true,
+      keepAlive: true
+    })
+  }
+});
 //AWS.config.loadFromPath('./aws-config.json');
 
 var dynamodb = new AWS.DynamoDB.DocumentClient();
@@ -21,7 +31,7 @@ const fromDB = Object.keys(toDB).reduce((acc, key) => acc[toDB[key]] = key, {});
 */
 
 function getOne(tableName, key) {
-  var params = {
+  const params = {
     TableName: tableName,
     Key: key
   };
@@ -39,7 +49,7 @@ function getOne(tableName, key) {
 }
 
 function getMany(tableName, keys) {
-  var params = {
+  const params = {
     RequestItems: {
       [tableName]: {
         Keys: keys
