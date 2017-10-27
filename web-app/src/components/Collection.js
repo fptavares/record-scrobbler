@@ -27,7 +27,7 @@ class Collection extends React.Component {
   }
 
   _handleScroll() {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 300)) {
       this._loadMore();
     }
   }
@@ -59,13 +59,13 @@ class Collection extends React.Component {
     }
 
     this.props.relay.loadMore(
-      48, // Fetch the next feed items
+      72, // Fetch the next feed items
       e => {
         if (e) {
           console.error(e);
           //throw(e);
         } else {
-          console.log('Load more callback empty.');
+          //this._loadingMore = false;
         }
       },
     );
