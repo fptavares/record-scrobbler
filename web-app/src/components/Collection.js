@@ -27,7 +27,7 @@ class Collection extends React.Component {
   }
 
   _handleScroll() {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 300)) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 400)) {
       this._loadMore();
     }
   }
@@ -59,7 +59,7 @@ class Collection extends React.Component {
     }
 
     this.props.relay.loadMore(
-      72, // Fetch the next feed items
+      96, // Fetch the next feed items
       e => {
         if (e) {
           console.error(e);
@@ -95,7 +95,7 @@ class Collection extends React.Component {
     if (!this.props.viewer.collection) {
       return <ErrorPage error={{code: 'RequiresCollection'}} />;
     }
-    
+
     return (
       <div>
         <div className="main-intro">
