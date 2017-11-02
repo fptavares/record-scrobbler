@@ -29,24 +29,36 @@ export function authenticateDiscogs(discogsRequestToken, discogsOauthVerifier) {
 }
 
 export function getDiscogsUser(token, username) {
+  console.time('getDiscogsUser');
   return client.get(`/user/${username}`, {
     headers: authHeader(token),
-  }).then(resp => resp.data);
+  }).then(resp => {
+    console.timeEnd('getDiscogsUser');
+    return resp.data;
+  });
 }
 
 export function getDiscogsCollection(token, username, after, size, folder, search) {
+  console.time('getDiscogsCollection');
   return client.get(`/collection/${username}`, {
     headers: authHeader(token),
     params: { folder, q: search, after, size },
-  }).then(resp => resp.data);
+  }).then(resp => {
+    console.timeEnd('getDiscogsCollection');
+    return resp.data;
+  });
 
 }
 
 export function getDiscogsCollectionAlbum(token, username, albumIds) {
   const formattedAlbumIds = albumIds.join(',');
+  console.time('getDiscogsCollectionAlbum');
   return client.get(`/collectionAlbum/${username}/${formattedAlbumIds}`, {
     headers: authHeader(token),
-  }).then(resp => resp.data);
+  }).then(resp => {
+    console.timeEnd('getDiscogsCollectionAlbum');
+    return resp.data;
+  });
 }
 
 export function getDiscogsRelease(token, releaseIds) {
