@@ -1,6 +1,7 @@
 const https = require('https');
 const AWSXRay = require('aws-xray-sdk');
 const AWS = AWSXRay.captureAWS(require('aws-sdk'));
+import { normalizeResults } from './utils';
 import config from './config';
 
 AWS.config.update({
@@ -36,14 +37,12 @@ function getOne(tableName, key) {
     Key: key
   };
 
-  console.time('getOne');
   return new Promise(
     (resolve, reject) => dynamodb.get(params, function(err, data) {
-      console.timeEnd('getOne');
       if (err) {
         return reject(err);
       }
-      resolve(data.Item);
+      resolve(data.Item || null);
     })
   );
 }
@@ -57,14 +56,12 @@ function getMany(tableName, keys) {
     }
   };
 
-  console.time('getMany');
   return new Promise(
     (resolve, reject) => dynamodb.batchGet(params, function(err, data) {
-      console.timeEnd('getMany');
       if (err) {
         return reject(err);
       }
-      resolve(data.Responses.CollectionAlbum);
+      resolve(normalizeResults(data.Responses.CollectionAlbum, keys, 'id'));
     })
   );
 }
@@ -149,9 +146,7 @@ function queryCollection(username, folder, search, after, size) {
       filters.unshift('username = :username');
       params.FilterExpression = filters.join(' and ');
 
-      console.time('scan');
       dynamodb.scan(params, function(err, data) {
-        console.timeEnd('scan');
         if (err) {
           return reject(err);
         }
@@ -162,9 +157,7 @@ function queryCollection(username, folder, search, after, size) {
       params.ScanIndexForward = false;
       params.Limit = parseInt(size);
 
-      console.time('query');
       dynamodb.query(params, function(err, data) {
-        console.timeEnd('query');
         if (err) {
           return reject(err);
         }
