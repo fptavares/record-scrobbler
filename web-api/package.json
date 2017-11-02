@@ -7,7 +7,7 @@
     "build": "gulp build",
     "update-schema": "babel-node ./scripts/updateSchema.js",
     "predeploy": "yarn build",
-    "deploy": "gcloud beta functions deploy api --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
+    "deploy": "gcloud beta functions deploy api --memory 512MB --stage-bucket record-scrobbler-src --trigger-http --source=build --region=us-central1",
     "deploy-local": "functions deploy api --trigger-http --local-path=build",
     "clean": "gulp clean"
   },
@@ -25,8 +25,8 @@
     "graphql": ">0.10.0",
     "graphql-relay": ">0.5.1",
     "jsonwebtoken": "^7.4.1",
-    "modofun": "*",
-    "modofun-trace-agent-plugin": "*",
+    "modofun": "^1.0.0",
+    "modofun-trace-agent-plugin": "^1.0.0",
     "morgan": "^1.9.0",
     "redis": "^2.7.1"
   },

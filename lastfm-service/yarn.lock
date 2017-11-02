@@ -43,8 +43,8 @@
     util.promisify "^1.0.0"
 
 "@google-cloud/trace-agent@^2.2.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/trace-agent/-/trace-agent-2.3.0.tgz#e38453e30ad02810b21ae3187f6f27987dbdc610"
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@google-cloud/trace-agent/-/trace-agent-2.3.1.tgz#491ff1aa411daec52755ee5ff8fbb321ba6a36be"
   dependencies:
     "@google-cloud/common" "^0.13.2"
     continuation-local-storage "^3.2.0"
@@ -2809,13 +2809,13 @@ modelo@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/modelo/-/modelo-4.2.0.tgz#3b4b420023a66ca7e32bdba16e710937e14d1b0b"
 
-modofun-trace-agent-plugin@*:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/modofun-trace-agent-plugin/-/modofun-trace-agent-plugin-0.2.0.tgz#147bf9eb7facacd85e186f5f8827b2ecf0c61820"
+modofun-trace-agent-plugin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/modofun-trace-agent-plugin/-/modofun-trace-agent-plugin-1.0.0.tgz#05a33b5b04a888c22b2a61a454b443d9997a4246"
 
-modofun@*:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/modofun/-/modofun-0.4.3.tgz#b45adf13e09ad6e0000d7bacf941b8e3adefd679"
+modofun@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/modofun/-/modofun-1.0.0.tgz#96bb35b64a50ced3f6844158343c322b908e7aa9"
 
 moment@2.x.x:
   version "2.18.1"
