@@ -27,7 +27,7 @@ class Collection extends React.Component {
   }
 
   _handleScroll() {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 400)) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - (window.innerHeight/2))) {
       this._loadMore();
     }
   }
