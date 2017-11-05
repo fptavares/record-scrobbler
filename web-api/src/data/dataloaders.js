@@ -47,6 +47,7 @@ export function createLoaders(user) {
     const nullLoader = createNullLoader();
     return {
       album: nullLoader,
+      release: nullLoader,
       playlist: nullLoader,
       collection: nullLoader,
       user: nullLoader,
