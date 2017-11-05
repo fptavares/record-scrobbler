@@ -61,7 +61,7 @@ function getMany(tableName, keys) {
       if (err) {
         return reject(err);
       }
-      resolve(normalizeResults(data.Responses.CollectionAlbum, keys, 'id'));
+      resolve(normalizeResults(data.Responses[tableName], keys));
     })
   );
 }
