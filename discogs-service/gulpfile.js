@@ -64,6 +64,14 @@ gulp.task('zip-upload-aws', function() {
     .pipe(gulp.dest('.'));
 });
 
+gulp.task('build-aws', function(callback) {
+  return runSequence(
+    'build',
+    'build-aws-dist',
+    callback
+  );
+});
+
 gulp.task('deploy-aws', function(callback) {
   return runSequence(
     'clean',
