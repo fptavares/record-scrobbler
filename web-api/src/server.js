@@ -17,7 +17,7 @@ server.use('/graphiql', graphQLHTTP(() => {
     graphiql: true,
   };
 }));
-server.use((req, res) => app(req, res)); // apply applicarion handler
+server.use(app); // apply applicarion handler
 server.listen(config.API_PORT, () => console.log(
   `Web API is now running on http://localhost:${config.API_PORT}`
 ));
