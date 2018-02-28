@@ -19,7 +19,7 @@
     "dotenv": "^4.0.0",
     "express-jwt": "^5.3.0",
     "jsonwebtoken": "^8.0.1",
-    "modofun": "^1.0.0",
+    "modofun": "*",
     "morgan": "^1.8.2"
   },
   "devDependencies": {
