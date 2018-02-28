@@ -17,4 +17,4 @@ function deleteTable(tableName) {
 
 deleteTable("User");
 deleteTable("CollectionAlbum");
-deleteTable("Release")
+//deleteTable("Release")
