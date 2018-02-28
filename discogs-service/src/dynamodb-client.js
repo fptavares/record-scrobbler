@@ -15,21 +15,9 @@ AWS.config.update({
 });
 //AWS.config.loadFromPath('./aws-config.json');
 
-var dynamodb = new AWS.DynamoDB.DocumentClient();
-
-/*const toDB = {
-  id: 'id',
-  releaseId: 'rd',
-  artist: 'a',
-  title: 't',
-  year: 'y',
-  thumb: 'i',
-  rating: 'r',
-  dateAdded: 'd',
-  folderId: 'f',
-};
-const fromDB = Object.keys(toDB).reduce((acc, key) => acc[toDB[key]] = key, {}); // inverse object
-*/
+const dynamodb = new AWS.DynamoDB.DocumentClient({
+  convertEmptyValues: true
+});
 
 function getOne(tableName, key) {
   const params = {
